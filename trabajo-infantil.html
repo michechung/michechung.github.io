@@ -3,30 +3,14 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <title>Highcharts/maps Example</title>
+
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
       <style type="text/css">
       <style>
-         * {
-         box-sizing: border-box;
-         }
-         body {
-         margin: 0;
-         }
-         .column {
-         float: left;
-         padding: 10px;
-         }
-         .left {
-         width: 25%;
-         }
-         .right {
-         width: 75%;
-         }
-         /* Clear floats after the columns */
-         .row:after {
-         content: "";
-         display: table;
-         clear: both;
-         }
+
+
          * { margin: 0; padding: 0; }
          body { font: 14px/1.4 Georgia, serif; }
          #sidebar ul { background: #eee; padding: 10px; }
@@ -65,6 +49,8 @@
          color: gray;
          }
          }
+
+
       </style>
       <script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
       <script>
@@ -86,8 +72,9 @@
       </script>
    </head>
    <body>
-      <div class="row">
-      <div class="column left">
+     <div class="container">
+     <div class="row">
+   <div class="col-lg-4">
          <div id="sidebar">
             <ul>
                <li><a href="#panamamap">Porcentaje de la Población de 5-17 años que Trabaja</a></li>
@@ -101,8 +88,9 @@
          </div>
       </div>
 
-      <div class="column right">
-         <h1>Encuesta de Trabajo Infantil 2010</h1>
+
+      <div class="col-lg-8">
+             <h1>Encuesta de Trabajo Infantil 2010</h1>
          <h5><a href="http://www.contraloria.gob.pa/inec/archivos/enti_panama.pdf">Fuente: Contraloría General de la República de Panamá</a></h5>
          <br />
          <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -234,7 +222,8 @@
 
 
          </script>
-      </div>
+       </div>
 		</div>
+  </div>
    </body>
 </html>
