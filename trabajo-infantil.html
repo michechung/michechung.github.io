@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <title>Highcharts/maps Example</title>
+      <style type="text/css">
+      <style>
+         * {
+         box-sizing: border-box;
+         }
+         body {
+         margin: 0;
+         }
+         .column {
+         float: left;
+         padding: 10px;
+         }
+         .left {
+         width: 25%;
+         }
+         .right {
+         width: 75%;
+         }
+         /* Clear floats after the columns */
+         .row:after {
+         content: "";
+         display: table;
+         clear: both;
+         }
+         * { margin: 0; padding: 0; }
+         body { font: 14px/1.4 Georgia, serif; }
+         #sidebar ul { background: #eee; padding: 10px; }
+         li { margin: 0 20px 0 20px; }
+         #main { width: 390px; float: left; }
+         * {
+         margin: 0;
+         padding: 0;
+         }
+         body {
+         overflow-x: hidden;
+         }
+         #sidebar {
+         position: fixed;
+         height: 800px;
+         left: 0;
+         top: 100px;
+         width: 20%;
+         }
+         h1, h3 {
+         font-family: Helvetica;
+         text-align: center;
+         }
+         h6 {
+         color: white;
+         }
+         #container {
+         height: 500px;
+         min-width: 310px;
+         max-width: 500px;
+         margin: 0 auto;
+         }
+         .loading {
+         margin-top: 10em;
+         text-align: center;
+         color: gray;
+         }
+         }
+      </style>
+      <script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+      <script>
+         $(function() {
+         		var offset = $("#sidebar").offset();
+         		var topPadding = 15;
+         		$(window).scroll(function() {
+         				if ($(window).scrollTop() > offset.top) {
+         						$("#sidebar").stop().animate({
+         								marginTop: $(window).scrollTop() - offset.top + topPadding
+         						});
+         				} else {
+         						$("#sidebar").stop().animate({
+         								marginTop: 0
+         						});
+         				};
+         		});
+         });
+      </script>
+   </head>
+   <body>
+      <div class="row">
+      <div class="column left">
+         <div id="sidebar">
+            <ul>
+               <li><a href="#panamamap">Porcentaje de la Población de 5-17 años que Trabaja</a></li>
+
+               <li><a href="#characteristics">Características Relevantes de la Población de 5-17 años que Trabaja</a></li>
+
+               <li><a href="#distribucion">Distribución de Trabajadores de 5-17 años por Disciplina</a></li>
+
+               <li><a href="#headline4">Headline 4</a></li>
+            </ul>
+         </div>
+      </div>
+
+      <div class="column right">
+         <h1>Encuesta de Trabajo Infantil 2010</h1>
+         <h5><a href="http://www.contraloria.gob.pa/inec/archivos/enti_panama.pdf">Fuente: Contraloría General de la República de Panamá</a></h5>
+         <br />
+         <script src="https://code.highcharts.com/highcharts.js"></script>
+         <script src="https://code.highcharts.com/modules/data.js"></script>
+         <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+         <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+         <script src="panama.js"></script>
+
+				 <h6><a name="panamamap">Porcentaje de la Población de 5-17 años que Trabaja</a></h6>
+         <div id="panama-map" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+         <h6><a name="characteristics">Características Relevantes de la Población de 5-17 años que Trabaja</a></h6>
+         <div id="characteristics" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+         <h6><a name="characteristics">Distribución de Trabajadores de 5-17 años por Disciplina</a></h6>
+         <div id="distribucion" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+
+				 <script type="text/javascript">
+            var data = [
+                ['pa-ch', 8.4],
+                ['pa-sb', 25.3],
+                ['pa-vr', 9.6],
+                ['pa-bc', 3],
+                ['pa-nb', 36.6],
+                ['pa-em', 36.6],
+                ['pa-cl', 6.2],
+                ['pa-he', 3.2],
+                ['pa-ls', 1.3],
+                ['pa-dr', 1.4],
+                ['pa-1119', 36.6],
+                ['pa-cc', 6.2]
+            ];
+
+						Highcharts.setOptions({
+						    colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+						});
+            // Panama Map
+            Highcharts.mapChart('panama-map', {
+                chart: {
+                    map: 'countries/pa/pa-all'
+                },
+
+
+                subtitle: {
+                    text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/pa/pa-all.js">Panama</a>'
+                },
+
+
+                colorAxis: {
+            			min: 0,
+
+                },
+
+                series: [{
+                    data: data,
+                    name: 'Trabajadores Infantiles',
+                    states: {
+                        hover: {
+                            color: '#BADA55'
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}'
+                    },
+            				tooltip: {
+            					pointFormat: "{point.value}%"
+            				}
+                }]
+            });
+
+
+            Highcharts.chart('characteristics', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Característica',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Sólo Estudia',
+                        y: 21.6,
+                    }, {
+                        name: 'Sólo Trabaja',
+                        y: 0.4,
+                        sliced: true,
+                        selected: true
+                    }, {
+                        name: 'Sólo Realiza Tareas del Hogar',
+                        y: 3.8,
+                    }, {
+                        name: 'Estudia y Realiza Tareas del Hogar',
+                        y: 65.2,
+                    }, {
+                        name: 'Estudia y Trabaja',
+                        y: 0.4,
+            				}, {
+            		           name: 'Realiza Tareas del Hogar y Trabaja',
+            		           y: 1.8,
+            				}, {
+             		         name: 'Estudia, Trabaja y Realiza Tareas del Hogar',
+             		         y: 4.5,
+            				}, {
+            						name: 'No Realiza Ninguna Actividad',
+            						y: 2.3,
+                    }]
+                }]
+            });
+
+
+         </script>
+      </div>
+		</div>
+   </body>
+</html>
