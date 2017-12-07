@@ -1,229 +1,532 @@
 <!DOCTYPE HTML>
 <html>
-   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <title>Highcharts/maps Example</title>
 
-      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Encuesta de Trabajo Infantil - Panamá 2010</title>
 
-      <style type="text/css">
-      <style>
-
-
-         * { margin: 0; padding: 0; }
-         body { font: 14px/1.4 Georgia, serif; }
-         #sidebar ul { background: #eee; padding: 10px; }
-         li { margin: 0 20px 0 20px; }
-         #main { width: 390px; float: left; }
-         * {
-         margin: 0;
-         padding: 0;
-         }
-         body {
-         overflow-x: hidden;
-         }
-         #sidebar {
-         position: fixed;
-         height: 800px;
-         left: 0;
-         top: 100px;
-         width: 20%;
-         }
-         h1, h3 {
-         font-family: Helvetica;
-         text-align: center;
-         }
-         h6 {
-         color: white;
-         }
-         #container {
-         height: 500px;
-         min-width: 310px;
-         max-width: 500px;
-         margin: 0 auto;
-         }
-         .loading {
-         margin-top: 10em;
-         text-align: center;
-         color: gray;
-         }
-         }
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
 
 
-      </style>
-      <script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
-      <script>
-         $(function() {
-         		var offset = $("#sidebar").offset();
-         		var topPadding = 15;
-         		$(window).scroll(function() {
-         				if ($(window).scrollTop() > offset.top) {
-         						$("#sidebar").stop().animate({
-         								marginTop: $(window).scrollTop() - offset.top + topPadding
-         						});
-         				} else {
-         						$("#sidebar").stop().animate({
-         								marginTop: 0
-         						});
-         				};
-         		});
-         });
-      </script>
-   </head>
-   <body>
-     <div class="container">
-     <div class="row">
-   <div class="col-lg-4">
-         <div id="sidebar">
-            <ul>
-               <li><a href="#panamamap">Porcentaje de la Población de 5-17 años que Trabaja</a></li>
+    <style type="text/css">
+        /* navbar */
 
-               <li><a href="#characteristics">Características Relevantes de la Población de 5-17 años que Trabaja</a></li>
+        .navbar-default {
+            background-color: #242D41;
+            border-color: #E7E7E7;
+            height: 60px;
+        }
 
-               <li><a href="#distribucion">Distribución de Trabajadores de 5-17 años por Disciplina</a></li>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /* unvisited link */
 
-               <li><a href="#headline4">Headline 4</a></li>
-            </ul>
-         </div>
-      </div>
+        a:link {
+            color: white;
+        }
+        /* visited link */
+
+        a:visited {
+            color: white;
+        }
+        /* mouse over link */
+
+        a:hover {
+            color: #FEBF28;
+        }
 
 
-      <div class="col-lg-8">
-             <h1>Encuesta de Trabajo Infantil 2010</h1>
-         <h5><a href="http://www.contraloria.gob.pa/inec/archivos/enti_panama.pdf">Fuente: Contraloría General de la República de Panamá</a></h5>
-         <br />
-         <script src="https://code.highcharts.com/highcharts.js"></script>
-         <script src="https://code.highcharts.com/modules/data.js"></script>
-         <script src="https://code.highcharts.com/modules/drilldown.js"></script>
-         <script src="https://code.highcharts.com/maps/modules/map.js"></script>
-         <script src="panama.js"></script>
 
-				 <h6><a name="panamamap">Porcentaje de la Población de 5-17 años que Trabaja</a></h6>
-         <div id="panama-map" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        body {
+            font: 14px/1.4 Georgia, serif;
+            background-image: url("childrenbgfull.png");
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
 
-         <h6><a name="characteristics">Características Relevantes de la Población de 5-17 años que Trabaja</a></h6>
-         <div id="characteristics" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        .title-bar {
+            background: rgba(0, 0, 0, 0.6);
+            text-align: center;
+            height: 100px;
+            width: 100%;
+            top: 800px;
+            padding: 10px, 0, 0, 0;
+        }
 
-         <h6><a name="characteristics">Distribución de Trabajadores de 5-17 años por Disciplina</a></h6>
-         <div id="distribucion" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+        .title-bar h1 {
+            color: white;
+        }
 
-				 <script type="text/javascript">
-            var data = [
-                ['pa-ch', 8.4],
-                ['pa-sb', 25.3],
-                ['pa-vr', 9.6],
-                ['pa-bc', 3],
-                ['pa-nb', 36.6],
-                ['pa-em', 36.6],
-                ['pa-cl', 6.2],
-                ['pa-he', 3.2],
-                ['pa-ls', 1.3],
-                ['pa-dr', 1.4],
-                ['pa-1119', 36.6],
-                ['pa-cc', 6.2]
-            ];
+        #sidebar ul {
+            padding: 10px;
+        }
 
-						Highcharts.setOptions({
-						    colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
-						});
-            // Panama Map
-            Highcharts.mapChart('panama-map', {
-                chart: {
-                    map: 'countries/pa/pa-all'
-                },
+        li {
+            margin: 0 20px 0 20px;
+        }
 
+        #main {
+            width: 390px;
+            float: left;
+        }
 
-                subtitle: {
-                    text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/pa/pa-all.js">Panama</a>'
-                },
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            overflow-x: hidden;
+        }
 
-                colorAxis: {
-            			min: 0,
+        #sidebar {
+            background: rgba(44, 180, 194, 0.7);
+            position: fixed;
+            height: 800px;
+            left: 0;
+            top: 60px;
+            width: 20%;
+            font-family: Helvetica;
+            font-size: 14px;
+        }
 
-                },
+        #map-container {
+            margin-top: 100%;
+        }
 
-                series: [{
-                    data: data,
-                    name: 'Trabajadores Infantiles',
-                    states: {
-                        hover: {
-                            color: '#BADA55'
-                        }
-                    },
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.name}'
-                    },
-            				tooltip: {
-            					pointFormat: "{point.value}%"
-            				}
-                }]
+        h1,
+        h3 {
+            font-family: Helvetica;
+            text-align: center;
+        }
+
+        h6 {
+            font-family: Helvetica;
+            color: white;
+        }
+
+        .loading {
+            margin-top: 10em;
+            text-align: center;
+            color: gray;
+        }
+        /* Style the tab */
+
+        div.tab {
+            float: left;
+            background-color: rgba(0, 0, 0, 0.4);
+            width: 80%;
+            height: 80%;
+            
+        }
+        /* Style the buttons inside the tab */
+
+        div.tab button {
+            display: block;
+            background-color: inherit;
+            color: black;
+            padding: 22px 16px;
+            width: 100%;
+            border: none;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+        /* Change background color of buttons on hover */
+
+        div.tab button:hover {
+            background-color: rgba(44, 180, 194, 0.7);
+        }
+        /* Create an active/current "tab button" class */
+
+        div.tab button.active {
+            background-color: #ccc;
+        }
+        /* Style the tab content */
+
+        .tabcontent {
+            float: left;
+            padding: 0px 12px;
+            border: 0px solid #ccc;
+            width: 100%;
+            border-left: none;
+            height: 100%;
+        }
+    </style>
+    <script>
+        $(function () {
+            var offset = $("div.tab").offset();
+            var topPadding = 15;
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > offset.top) {
+                    $("div.tab").stop().animate({
+                        marginTop: $(window).scrollTop() - offset.top + topPadding
+                    }, 100);
+                } else {
+                    $("div.tab").stop().animate({
+                        marginTop: 0
+                    });
+                };
             });
+            $(".tabcontent").height(window.outerHeight)
+        });
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="ninezpanamalogo.png" height="30px">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!--
+              <div class="title-bar">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-9">
+              <h1>Encuesta de Trabajo Infantil 2010</h1>
+              <h5>
+                  <a href="http://www.contraloria.gob.pa/inec/archivos/enti_panama.pdf">Fuente: Contraloría General de la República de Panamá</a>
+              </h5>
+              </div>
+              </div>
+            -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+
+                <div class="tab">
+                    <button class="tablinks" onclick="openChart('map-container')">Porcentaje de la Población de 5-17 años que Trabaja</button>
+                    <button class="tablinks" onclick="openChart('characteristics-container')">Características Relevantes de la Población de 5-17 años que Trabaja</button>
+                    <button class="tablinks" onclick="openChart('distribution-container')">Distribución de Trabajadores de 5-17 años por Disciplina</button>
+                </div>
 
 
-            Highcharts.chart('characteristics', {
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false,
-                    type: 'pie'
-                },
 
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                            style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                            }
-                        }
+                <!--
+                <div id="sidebar">
+                    <ul>
+                        <li>
+                            <a href="#panamamap">Porcentaje de la Población de 5-17 años que Trabaja</a>
+                        </li>
+
+                        <li>
+                            <a href="#characteristics">Características Relevantes de la Población de 5-17 años que Trabaja</a>
+                        </li>
+
+                        <li>
+                            <a href="#distribucion">Distribución de Trabajadores de 5-17 años por Disciplina</a>
+                        </li>
+
+                        <li>
+                            <a href="#headline4">Headline 4</a>
+                        </li>
+                    </ul>
+                </div> -->
+            </div>
+
+            <div class="col-lg-9">
+                <br />
+                <script src="https://code.highcharts.com/highcharts.js"></script>
+                <script src="https://code.highcharts.com/modules/data.js"></script>
+                <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+                <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+                <script src="panama.js"></script>
+
+                <div id="map-container" class="tabcontent">
+                    <div id="panama-map" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+                </div>
+
+                <div id="characteristics-container" class="tabcontent">
+                    <div id="characteristics" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+                </div>
+
+                <div id="distribution-container" class="tabcontent">
+                    <div id="distribucion" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+                </div>
+
+                <script type="text/javascript">
+                    function openChart(divId) {
+                        $(window).scrollTo($("#" + divId), 500);
                     }
-                },
-                series: [{
-                    name: 'Característica',
-                    colorByPoint: true,
-                    data: [{
-                        name: 'Sólo Estudia',
-                        y: 21.6,
-                    }, {
-                        name: 'Sólo Trabaja',
-                        y: 0.4,
-                        sliced: true,
-                        selected: true
-                    }, {
-                        name: 'Sólo Realiza Tareas del Hogar',
-                        y: 3.8,
-                    }, {
-                        name: 'Estudia y Realiza Tareas del Hogar',
-                        y: 65.2,
-                    }, {
-                        name: 'Estudia y Trabaja',
-                        y: 0.4,
-            				}, {
-            		           name: 'Realiza Tareas del Hogar y Trabaja',
-            		           y: 1.8,
-            				}, {
-             		         name: 'Estudia, Trabaja y Realiza Tareas del Hogar',
-             		         y: 4.5,
-            				}, {
-            						name: 'No Realiza Ninguna Actividad',
-            						y: 2.3,
-                    }]
-                }]
-            });
 
 
-         </script>
-       </div>
-		</div>
-  </div>
-   </body>
+                    var data = [
+                        ['pa-ch', 8.4],
+                        ['pa-sb', 25.3],
+                        ['pa-vr', 9.6],
+                        ['pa-bc', 3],
+                        ['pa-nb', 36.6],
+                        ['pa-em', 36.6],
+                        ['pa-cl', 6.2],
+                        ['pa-he', 3.2],
+                        ['pa-ls', 1.3],
+                        ['pa-dr', 1.4],
+                        ['pa-1119', 36.6],
+                        ['pa-cc', 6.2]
+                    ];
+
+                    Highcharts.setOptions({
+                        colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655',
+                            '#FFF263', '#6AF9C4'
+                        ]
+                    });
+                    // Panama Map
+                    Highcharts.mapChart('panama-map', {
+                        chart: {
+                            map: 'countries/pa/pa-all'
+                        },
+
+                        title: {
+                            text: 'Porcentaje de la Población de 5-17 años que Trabaja'
+                        },
+
+
+                        subtitle: {
+                            text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/pa/pa-all.js">Panama</a>'
+                        },
+                        colors: ["#EF7371", "#F08280", "#F29290", "#F4A1A0", "#F6B1B0", "#F7C0BF", "#F9D0CF", "#FBDFDF", "#FDEFEF", "#FFFFFF"],
+                        colorAxis: {
+                            min: 0,
+                            labels: {
+                                format: '{value}%'
+                            }
+                        },
+
+                        series: [{
+                            data: data,
+                            name: 'Trabajadores Infantiles',
+                            states: {
+                                hover: {
+                                    color: '#BADA55'
+                                }
+                            },
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.name}'
+                            },
+                            tooltip: {
+                                pointFormat: "{point.value}%"
+                            }
+                        }]
+                    });
+
+                    Highcharts.chart('distribucion', {
+                        chart: {
+                            type: 'pie'
+                        },
+                        title: {
+                            text: 'Distribución de Trabajadores de 5-17 años por Disciplina'
+                        },
+                        subtitle: {
+                            text: 'Haga click en cada categoría para expandir las disciplinas'
+                        },
+                        plotOptions: {
+                            series: {
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '{point.name}: {point.y:.1f}%'
+                                }
+                            }
+                        },
+
+                        tooltip: {
+                            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                        },
+                        series: [{
+                            name: 'Grupo ocupacional',
+                            colorByPoint: true,
+                            data: [{
+                                name: 'Agropecuarios',
+                                y: 59.8,
+                                drilldown: 'agropecuarios'
+                            }, {
+                                name: 'Artesanías',
+                                y: 16.4,
+                                drilldown: 'artesanos'
+                            }, {
+                                name: 'Venta y comercios',
+                                y: 12.8,
+                                drilldown: 'vendedores'
+                            }, {
+                                name: 'Minería, construcción y mecánica',
+                                y: 6.3,
+                                drilldown: 'mineros'
+                            }, {
+                                name: 'Técnicos y oficina',
+                                y: 2.4,
+                                drilldown: 'tecnicos'
+                            }, {
+                                name: 'Empleados domésticos',
+                                y: 2.3,
+                                drilldown: 'domesticos'
+                            }]
+                        }],
+                        drilldown: {
+                            series: [{
+                                name: 'Distribución de trabajadores agropecuarios, forestales, de pesca y caza',
+                                id: 'agropecuarios',
+                                data: [
+                                    ['Agricultor de arroz, maíz y frijol', 14.29],
+                                    ['Agricultor de frutales, café y cacao', 14.29],
+                                    ['Empleado pecuario', 14.29],
+                                    ['Empleado agrícola', 14.29],
+                                    ['Agricultor de hortalizas', 14.29],
+                                    [
+                                        'Otras ocupaciones en actividades agropecuarias, silvícolas y forestales',
+                                        14.29
+                                    ]
+                                    [
+                                        'Otras ocupaciones en actividades ganaderas, acuáticas y pescadores',
+                                        14.29
+                                    ],
+                                ]
+                            }, {
+                                name: 'Distribución de artesanos y vendedores ambulantes',
+                                id: 'artesanos',
+                                data: [
+                                    ['Vendedores ambulantes de comestibles', 8.33],
+                                    ['Vendedores ambulante de comestibles', 8.33],
+                                    ['Costureros, bordadores y afines', 8.33],
+                                    ['Pintores, músicos y cantantes', 8.33],
+                                    ['Meseros, ayudantes en restaurante', 8.33],
+                                    ['Elaborador de alimentos', 8.33],
+                                    ['Cocineros', 8.33],
+                                    ['Peluqueros y esteticistas', 8.33],
+                                    ['Sastres y modistas', 8.33],
+                                    ['Pintores y empapeladores', 8.33],
+                                    ['Tapiceros colchoneros', 8.33],
+
+                                ]
+                            }, {
+                                name: 'Distribución de vendedores y ayudantes en comercios',
+                                id: 'vendedores',
+                                data: [
+                                    ['Vendedores de alimentos y bebidas', 14.28],
+                                    ['Alfafreros y confeccionadores', 14.28],
+                                    ['Empacador y cargador de paquetes', 14.28],
+                                    ['Vendedor propietario en comercio', 14.28],
+                                    ['Vendedor en almacenes y supermercados', 14.28],
+                                    ['Empacador y acomodador de mercancía', 14.28],
+                                    ['Despachador de kiosko o pedidos', 14.28],
+
+                                ]
+                            }, {
+                                name: 'Distribución de trabajadores en minería, construcción y mecánica',
+                                id: 'mineros',
+                                data: [
+                                    ['Limpiadores de lotes', 16.67],
+                                    ['Obreros de transporte', 16.67],
+                                    ['Secretarios ayudante de autobús', 16.67],
+                                    ['Ayudantes de construcción', 16.67],
+                                    ['Trabajadores de acabados de construcción', 16.67],
+                                    ['Operadores de montacarga o conductores', 16.67],
+
+                                ]
+                            }, {
+                                name: 'Distribución de técnicos y empleados de oficina',
+                                id: 'tecnicos',
+                                data: [
+                                    ['Empleados de oficina', 33.33],
+                                    ['Ayudante de ebanistería', 33.33],
+                                    ['Técnicos y profesionales de nivel medio', 33.33],
+
+                                ]
+                            }, {
+                                name: 'Distribución de empleados domésticos',
+                                id: 'domesticos',
+                                data: [
+                                    ['Cuidadores de personas adultas o acompañantes', 16.67],
+                                    ['Limpiadores de casas o aseadores', 16.67],
+                                    ['Niñeros', 16.67],
+                                    ['Empleados domésticos', 16.67],
+                                    ['Lavadores y planchadores manuales', 16.67],
+                                    ['Cocineros', 16.67],
+
+                                ]
+                            }]
+                        }
+                    });
+
+                    Highcharts.chart('characteristics', {
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            type: 'bar'
+                        },
+
+                        tooltip: {
+                            valueSuffix: '%'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                    style: {
+                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) ||
+                                            'black'
+                                    }
+                                }
+                            }
+                        },
+
+                        xAxis: {
+                            categories: ['Estudia y Realiza Tareas del Hogar', 'Sólo Estudia',
+                                "Estudia, Trabaja y Realiza Tareas del Hogar",
+                                'Sólo Realiza Tareas del Hogar', 'No Realiza Ninguna Actividad',
+                                'Realiza Tareas del Hogar y Trabaja', 'Estudia y Trabaja', 'Sólo Trabaja'
+                            ],
+                            title: {
+                                text: null
+                            }
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: '%',
+                                align: 'high'
+                            },
+                            labels: {
+                                overflow: 'justify'
+                            }
+                        },
+                        plotOptions: {
+                            bar: {
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '{point.y:.1f}%'
+                                }
+                            }
+                        },
+
+                        series: [{
+                            name: "2010",
+                            data: [65.2, 21.6, 4.5, 3.8, 2.3, 1.8, 0.4, 0.4]
+                        }]
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>
