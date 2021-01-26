@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Encuesta de Trabajo Infantil - Panamá 2010</title>
+    <title>Child Labor in Panama 2010</title>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
@@ -196,9 +196,9 @@
               <div class="title-bar">
                             <div class="col-lg-3"></div>
                             <div class="col-lg-9">
-              <h1>Encuesta de Trabajo Infantil 2010</h1>
+              <h1>Child Labor in Panama in 2010</h1>
               <h5>
-                  <a href="http://www.contraloria.gob.pa/inec/archivos/enti_panama.pdf">Fuente: Contraloría General de la República de Panamá</a>
+                  <a href="http://www.contraloria.gob.pa/inec/archivos/enti_panama.pdf">Source:  Comptroller General of the Republic of Panama</a>
               </h5>
               </div>
               </div>
@@ -209,9 +209,9 @@
             <div class="col-lg-3">
 
                 <div class="tab">
-                    <button class="tablinks" onclick="openChart('map-container')">Porcentaje de la Población de 5-17 años que Trabaja</button>
-                    <button class="tablinks" onclick="openChart('characteristics-container')">Características Relevantes de la Población de 5-17 años que Trabaja</button>
-                    <button class="tablinks" onclick="openChart('distribution-container')">Distribución de Trabajadores de 5-17 años por Disciplina</button>
+                    <button class="tablinks" onclick="openChart('map-container')">Percentage of the 5-17 population that works</button>
+                    <button class="tablinks" onclick="openChart('characteristics-container')">Relevant characteristics of the 5-17 population that works</button>
+                    <button class="tablinks" onclick="openChart('distribution-container')">Distribution of the 5-17 working population by discipline</button>
                 </div>
 
 
@@ -271,7 +271,7 @@
                         },
 
                         title: {
-                            text: 'Porcentaje de la Población de 5-17 años que Trabaja'
+                            text: 'Percentage of the 5-17 population that works'
                         },
 
 
@@ -289,7 +289,7 @@
 
                         series: [{
                             data: data,
-                            name: 'Trabajadores Infantiles',
+                            name: 'Child Workers',
                             states: {
                                 hover: {
                                     color: '#FEBF28'
@@ -310,10 +310,10 @@
                             type: 'pie'
                         },
                         title: {
-                            text: 'Distribución de Trabajadores de 5-17 años por Disciplina'
+                            text: 'Distribution of workers aged 5-17 by discipline'
                         },
                         subtitle: {
-                            text: 'Haga click en cada categoría para expandir las disciplinas'
+                            text: 'Click on each category to expand the disciplines'
                         },
                         plotOptions: {
                             series: {
@@ -331,30 +331,30 @@
                             pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
                         },
                         series: [{
-                            name: 'Grupo ocupacional',
+                            name: 'Occupational group',
                             colorByPoint: true,
                             data: [{
-                                name: 'Agropecuarios',
+                                name: 'Agricultural',
                                 y: 59.8,
                                 drilldown: 'agropecuarios'
                             }, {
-                                name: 'Artesanías',
+                                name: 'Crafts',
                                 y: 16.4,
                                 drilldown: 'artesanos'
                             }, {
-                                name: 'Venta y comercios',
+                                name: 'Sales and business',
                                 y: 12.8,
                                 drilldown: 'vendedores'
                             }, {
-                                name: 'Minería, construcción y mecánica',
+                                name: 'Mining, construction and mechanics',
                                 y: 6.3,
                                 drilldown: 'mineros'
                             }, {
-                                name: 'Técnicos y oficina',
+                                name: 'Technicians and office',
                                 y: 2.4,
                                 drilldown: 'tecnicos'
                             }, {
-                                name: 'Empleados domésticos',
+                                name: 'Domestic employees',
                                 y: 2.3,
                                 drilldown: 'domesticos'
                             }]
@@ -364,17 +364,17 @@
                                 name: 'Distribución de trabajadores agropecuarios, forestales, de pesca y caza',
                                 id: 'agropecuarios',
                                 data: [
-                                    ['Agricultor de arroz, maíz y frijol', 14.29],
-                                    ['Agricultor de frutales, café y cacao', 14.29],
-                                    ['Empleado pecuario', 14.29],
-                                    ['Empleado agrícola', 14.29],
-                                    ['Agricultor de hortalizas', 14.29],
+                                    ['Rice, corn and bean farmer', 14.29],
+                                    ['Fruit, coffee and cocoa farmer', 14.29],
+                                    ['Livestock employee', 14.29],
+                                    ['Agricultural employee', 14.29],
+                                    ['Vegetable farmer', 14.29],
                                     [
-                                        'Otras ocupaciones en actividades agropecuarias, silvícolas y forestales',
+                                        'Other occupations in agricultural, forestry and forestry activities',
                                         14.29
                                     ]
                                     [
-                                        'Otras ocupaciones en actividades ganaderas, acuáticas y pescadores',
+                                        'Other occupations in livestock, aquatic and fishing activities',
                                         14.29
                                     ],
                                 ]
@@ -382,63 +382,62 @@
                                 name: 'Distribución de artesanos y vendedores ambulantes',
                                 id: 'artesanos',
                                 data: [
-                                    ['Vendedores ambulantes de comestibles', 8.33],
-                                    ['Vendedores ambulante de comestibles', 8.33],
-                                    ['Costureros, bordadores y afines', 8.33],
-                                    ['Pintores, músicos y cantantes', 8.33],
-                                    ['Meseros, ayudantes en restaurante', 8.33],
-                                    ['Elaborador de alimentos', 8.33],
-                                    ['Cocineros', 8.33],
-                                    ['Peluqueros y esteticistas', 8.33],
-                                    ['Sastres y modistas', 8.33],
-                                    ['Pintores y empapeladores', 8.33],
-                                    ['Tapiceros colchoneros', 8.33],
+                                    ['Street food vendors', 8.33],
+                                    ['CSeamstresses, embroiderers and related', 8.33],
+                                    ['Painters, musicians and singers', 8.33],
+                                    ['Waiters, assistants in restaurant', 8.33],
+                                    ['Food processor', 8.33],
+                                    ['Cooks', 8.33],
+                                    ['Hairdressers and beauticians', 8.33],
+                                    ['Tailors and seamstresses', 8.33],
+                                    ['Painters and interior workers', 8.33],
+                                    ['Mattress upholsterers', 8.33],
 
                                 ]
                             }, {
                                 name: 'Distribución de vendedores y ayudantes en comercios',
                                 id: 'vendedores',
                                 data: [
-                                    ['Vendedores de alimentos y bebidas', 14.28],
-                                    ['Alfafreros y confeccionadores', 14.28],
-                                    ['Empacador y cargador de paquetes', 14.28],
-                                    ['Vendedor propietario en comercio', 14.28],
-                                    ['Vendedor en almacenes y supermercados', 14.28],
-                                    ['Empacador y acomodador de mercancía', 14.28],
-                                    ['Despachador de kiosko o pedidos', 14.28],
+                                    ['Food and beverage vendors', 14.28],
+                                    ['Artisans and makers', 14.28],
+                                    ['Packer and package loader', 14.28],
+                                    ['Owner seller in trade', 14.28],
+                                    ['Seller in warehouses and supermarkets', 14.28],
+                                    ['Packer and goods organizer', 14.28],
+                                    ['Kiosk or order dispatcher', 14.28],
 
                                 ]
                             }, {
                                 name: 'Distribución de trabajadores en minería, construcción y mecánica',
                                 id: 'mineros',
                                 data: [
-                                    ['Limpiadores de lotes', 16.67],
-                                    ['Obreros de transporte', 16.67],
-                                    ['Secretarios ayudante de autobús', 16.67],
-                                    ['Ayudantes de construcción', 16.67],
-                                    ['Trabajadores de acabados de construcción', 16.67],
-                                    ['Operadores de montacarga o conductores', 16.67],
+                                    ['Lot cleaners', 16.67],
+                                    ['Transportation workers', 16.67],
+                                    ['Bus assistant clerks', 16.67],
+                                    ['Construction helpers', 16.67],
+                                    ['Construction finishing workers', 16.67],
+                                    ['Forklift operators or drivers', 16.67],
 
                                 ]
                             }, {
                                 name: 'Distribución de técnicos y empleados de oficina',
                                 id: 'tecnicos',
                                 data: [
-                                    ['Empleados de oficina', 33.33],
-                                    ['Ayudante de ebanistería', 33.33],
-                                    ['Técnicos y profesionales de nivel medio', 33.33],
+                                    ['Office employees', 33.33],
+                                    ['Woodworking assistants', 33.33],
+                                    ['Technicians and mid-level professionals', 33.33],
 
                                 ]
                             }, {
                                 name: 'Distribución de empleados domésticos',
                                 id: 'domesticos',
                                 data: [
-                                    ['Cuidadores de personas adultas o acompañantes', 16.67],
-                                    ['Limpiadores de casas o aseadores', 16.67],
-                                    ['Niñeros', 16.67],
-                                    ['Empleados domésticos', 16.67],
-                                    ['Lavadores y planchadores manuales', 16.67],
-                                    ['Cocineros', 16.67],
+                                    ['Adult caregivers or companions', 16.67],
+                                    ['House cleaners', 16.67],
+                                    ['Caregivers', 16.67],
+                                    ['Domestic employees', 16.67],
+                                    ['Manual washers', 16.67],
+                                    ['Cooks', 16.67],
 
                                 ]
                             }]
@@ -453,7 +452,7 @@
                             type: 'bar'
                         },
                         title: {
-                            text: 'Características Relevantes de la Población de 5-17 años que Trabaja'
+                            text: 'Relevant characteristics of the 5-17 population that works'
                         },
 
                         tooltip: {
@@ -476,10 +475,10 @@
                         colors: ['#EF7371'],
 
                         xAxis: {
-                            categories: ['Estudia y Realiza Tareas del Hogar', 'Sólo Estudia',
-                                "Estudia, Trabaja y Realiza Tareas del Hogar",
-                                'Sólo Realiza Tareas del Hogar', 'No Realiza Ninguna Actividad',
-                                'Realiza Tareas del Hogar y Trabaja', 'Estudia y Trabaja', 'Sólo Trabaja'
+                            categories: ['Studies and does house chores', 'Only studies',
+                                "Studies, works, and does house chores",
+                                'Only does house chores', 'Does not do any activity',
+                                'Does house chores and works', 'Studies and works', 'Only works'
                             ],
                             title: {
                                 text: null
